@@ -14,7 +14,7 @@ https://api.hom.trusthub.com.br/invoices/v1/
 
 https://api.hom.trusthub.com.br/invoices/v1/999999
 
-**Lista pagina de notas fiscais**
+**Lista paginada de notas fiscais**
 
 https://api.hom.trusthub.com.br/invoices/v1/1/1?client_id=11212 
 
