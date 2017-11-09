@@ -11,7 +11,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.HttpClientBuilder;
 
-public class InvoiceConsult {
+public class InvoiceSearch {
 
 	private final static String USER_AGENT = "Mozilla/5.0";
 
