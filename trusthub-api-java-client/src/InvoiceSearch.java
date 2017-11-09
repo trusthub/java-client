@@ -16,7 +16,8 @@ public class InvoiceSearch {
 	private final static String USER_AGENT = "Mozilla/5.0";
 
 	public static void main(String[] args) throws ClientProtocolException, IOException {
-		String url = "http://localhost:9999/invoiceIntegration/invoices/v1/1";
+		//String url = "http://localhost:9999/invoiceIntegration/invoices/v1/1";
+		String url = "http://api.hom.trusthub.com.br/invoiceIntegration/invoices/v1/1";
 
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpGet request = new HttpGet(url);
