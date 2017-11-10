@@ -1,9 +1,13 @@
+package br.com.trusthub.api;
+
 import java.io.BufferedReader;
-import java.io.File;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -11,13 +15,12 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 public class InvoiceInsert {
 
 	public static void main(String[] args) throws ClientProtocolException, IOException {
-		String url = "http://localhost:9999/invoiceIntegration/invoices/v1/";
+		String url = "https://api-hom.trusthub.com.br/integration/invoices/v1/";
 
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpPost request = new HttpPost(url);
@@ -47,8 +50,13 @@ public class InvoiceInsert {
 		 * 		InputStreamBody (InputStream, contentType, file_name)
 		 * 
 		 * */
-		File arquivo = new File("c:/srm-config/queue.properties");
-		multipartEntity.addPart("file_name", new FileBody(arquivo, contentType, arquivo.getName()));
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ZipOutputStream zos = new ZipOutputStream(baos);
+		ZipEntry ze = new ZipEntry("c:/temp/teste_api/Fatura_OK.xml");
+		zos.putNextEntry(ze);
+		zos.closeEntry();
+		multipartEntity.addBinaryBody("teste.zip", baos.toByteArray(), contentType, "teste.zip");
+
 		/*
 		 * contentType - ContentType.MULTIPART_FORM_DATA.withCharset(Charset.forName(charset))
 		 * charset - Deve ser UTF-8

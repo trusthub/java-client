@@ -1,3 +1,5 @@
+package br.com.trusthub.api;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,17 +13,19 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.HttpClientBuilder;
 
-public class InvoiceList {
+public class InvoiceConsult {
+
+	private final static String USER_AGENT = "Mozilla/5.0";
 
 	public static void main(String[] args) throws ClientProtocolException, IOException {
-		String url = "http://localhost:9999/invoiceIntegration/invoices/v1/1/1/10";
+		String url = "https://api-hom.trusthub.com.br/integration/invoices/v1/99999999";
 
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpGet request = new HttpGet(url);
 
 		/*
 		 * Charset - Deve ser UTF-8
-		 * contentType - ContentType.APPLICATION_JSON
+		 * contentType - ContentType.APPLICATION_JSON (application/json)
 		 * boundary - Um identificador unico para a requisição
 		 */
 		String charset = "UTF-8";
@@ -44,6 +48,7 @@ public class InvoiceList {
 		request.addHeader("Authorization", "Bearer " + "99f0e2361ccbf5dca644e78ba6038316");
 
 		HttpResponse response = client.execute(request);
+		response.addHeader("Content-Type", "application/json");
 
 		System.out.println("Response Code : " + response.getStatusLine().getStatusCode());
 
